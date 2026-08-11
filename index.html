@@ -25,27 +25,37 @@ function toggleCart(){panel.classList.toggle("open");draw()}
 function filter(c){render(dishes.filter(x=>x[3]==c));restaurants.scrollIntoView({behavior:"smooth"})}
 function partner(){window.open("https://wa.me/2250509062387?text="+encodeURIComponent("Bonjour IDREFOOD, je souhaite devenir partenaire."),"_blank")}
   function order(){
-  if(!cart.length){
-    return alert("Votre panier est vide.");
+  if(cart.length === 0){
+    alert("Votre panier est vide.");
+    return;
   }
 
-  if(!name.value.trim() || !phone.value.trim() || !address.value.trim()){
-    return alert("Veuillez remplir votre nom, téléphone et adresse de livraison.");
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Veuillez remplir votre nom, téléphone et adresse de livraison.");
+    return;
   }
 
   let message = "Bonjour IDREFOOD, je souhaite passer cette commande :\n\n";
 
-  cart.forEach(item => {
-    message += "🍽️ " + item[0] + " x" + item[4] + " = " + (item[3] * item[4]) + " FCFA\n";
+  cart.forEach(function(item){
+    message += "🍽️ " + item[0] + " x " + item[4] + " = " + (item[2] * item[4]) + " FCFA\n";
   });
 
-  message += "\n💰 Total : " + cart.reduce((total,item) => total + item[3] * item[4], 0) + " FCFA";
-  message += "\n\n👤 Nom : " + name.value.trim();
-  message += "\n📞 Téléphone : " + phone.value.trim();
-  message += "\n📍 Adresse : " + address.value.trim();
+  const totalCommande = cart.reduce(function(total, item){
+    return total + item[2] * item[4];
+  }, 0);
+
+  message += "\n💰 Total : " + totalCommande + " FCFA";
+  message += "\n👤 Nom : " + name;
+  message += "\n📞 Téléphone : " + phone;
+  message += "\n📍 Adresse : " + address;
 
   const whatsappUrl = "https://wa.me/2250509062387?text=" + encodeURIComponent(message);
 
-  window.location.href = "https://wa.me/2250509062387?text=" + encodeURIComponent(message);
+  window.location.href = whatsappUrl;
 }
 </script></body></html>
