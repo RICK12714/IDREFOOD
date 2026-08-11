@@ -22,6 +22,9 @@ nav{display:flex;gap:25px;font-weight:700}.btn{border:0;border-radius:12px;backg
 .total{display:flex;justify-content:space-between;font-size:20px;font-weight:900;margin:18px 0}.checkout input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}
 .close{float:right;border:0;background:#eee;border-radius:8px;padding:6px 10px;cursor:pointer}
 @media(max-width:800px){nav{display:none}.grid,.restaurant{grid-template-columns:1fr}.cats{grid-template-columns:1fr 1fr}.menu{grid-template-columns:1fr}.hero h1{font-size:43px}}
+.payment-box{margin-top:16px;border-top:1px solid #eee;padding-top:16px}.payment-title{font-size:18px;font-weight:900;margin-bottom:10px}
+.payment-option{display:flex;align-items:center;gap:10px;border:1px solid #ddd;border-radius:12px;padding:11px;margin:8px 0;cursor:pointer}
+.payment-option input{accent-color:#ff5a1f}.payment-note{font-size:13px;color:#666;line-height:1.4}
 </style>
 </head>
 <body>
@@ -60,8 +63,20 @@ nav{display:flex;gap:25px;font-weight:700}.btn{border:0;border-radius:12px;backg
 
 <div class="cart-panel" id="panel"><button class="close" onclick="toggleCart()">✕</button><h2>🛒 Votre panier</h2>
 <div id="items"></div><div class="total"><span>Total</span><span id="total">0 FCFA</span></div>
-<div class="checkout"><input id="name" placeholder="Votre nom"><input id="phone" placeholder="Votre téléphone"><input id="address" placeholder="Adresse de livraison">
-<button class="btn" style="width:100%;margin-top:8px" onclick="order()">📱 Commander sur WhatsApp</button></div></div>
+<div class="payment-box">
+<div class="payment-title">💳 Choisissez votre moyen de paiement</div>
+<label class="payment-option"><input type="radio" name="payment" value="livraison" checked> 💵 Paiement à la livraison</label>
+<label class="payment-option"><input type="radio" name="payment" value="orange"> 🟠 Orange Money</label>
+<label class="payment-option"><input type="radio" name="payment" value="mtn"> 🟡 MTN MoMo</label>
+<label class="payment-option"><input type="radio" name="payment" value="moov"> 🔵 Moov Money</label>
+<label class="payment-option"><input type="radio" name="payment" value="wave"> 🟣 Wave</label>
+<label class="payment-option"><input type="radio" name="payment" value="card"> 💳 Carte bancaire</label>
+<p class="payment-note">Pour l'instant, le choix est transmis avec la commande. Les paiements en ligne seront activés après connexion à un prestataire.</p>
+</div>
+<div class="checkout">
+<input id="name" placeholder="Votre nom"><input id="phone" placeholder="Votre téléphone"><input id="address" placeholder="Adresse de livraison">
+<button class="btn" style="width:100%;margin-top:8px" onclick="order()">📱 Confirmer la commande</button>
+</div></div>
 
 <script>
 const WHATSAPP="2250509062387";
@@ -102,11 +117,14 @@ const n=document.getElementById("name").value.trim();
 const p=document.getElementById("phone").value.trim();
 const a=document.getElementById("address").value.trim();
 if(!n||!p||!a){alert("Veuillez remplir votre nom, téléphone et adresse de livraison.");return}
-let message="Bonjour IDREFOOD, je souhaite passer une commande :\n\n";
-message+="👤 Nom : "+n+"\n📞 Téléphone : "+p+"\n📍 Adresse : "+a+"\n\n🍽️ COMMANDE :\n";
-cart.forEach(x=>message+="- "+x[0]+" x"+x[4]+" = "+(x[2]*x[4]).toLocaleString("fr-FR")+" FCFA\n");
+const selected=document.querySelector('input[name="payment"]:checked');
+const names={livraison:"Paiement à la livraison",orange:"Orange Money",mtn:"MTN MoMo",moov:"Moov Money",wave:"Wave",card:"Carte bancaire"};
+let message="Bonjour IDREFOOD, je souhaite passer une commande :\\n\\n";
+message+="👤 Nom : "+n+"\\n📞 Téléphone : "+p+"\\n📍 Adresse : "+a+"\\n";
+message+="💳 Paiement choisi : "+names[selected?selected.value:"livraison"]+"\\n\\n🍽️ COMMANDE :\\n";
+cart.forEach(x=>message+="- "+x[0]+" x"+x[4]+" = "+(x[2]*x[4]).toLocaleString("fr-FR")+" FCFA\\n");
 const total=cart.reduce((s,x)=>s+x[2]*x[4],0);
-message+="\n💰 TOTAL : "+total.toLocaleString("fr-FR")+" FCFA";
+message+="\\n💰 TOTAL : "+total.toLocaleString("fr-FR")+" FCFA";
 window.location.href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(message);
 }
 render();draw();
