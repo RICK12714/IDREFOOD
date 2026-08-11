@@ -1,34 +1,148 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IDREFOOD — Livraison de repas</title>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IDREFOOD — Livraison de repas</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#171717}a{text-decoration:none;color:inherit}.c{max-width:1150px;margin:auto;padding:0 20px}
-header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;z-index:5}.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:28px;font-weight:900;color:#ff5a1f}.logo span{color:#171717}nav{display:flex;gap:25px;font-weight:700;font-size:14px}.btn{border:0;border-radius:12px;background:#ff5a1f;color:#fff;padding:14px 20px;font-weight:800;cursor:pointer}
-.hero{background:#fff8f3;padding:65px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}h1{font-size:55px;line-height:1;margin:15px 0}h1 span{color:#ff5a1f}.hero p{font-size:18px;line-height:1.6;color:#666}.search{display:flex;background:#fff;border:1px solid #ddd;padding:7px;border-radius:14px;margin-top:25px}.search input{flex:1;border:0;outline:0;padding:14px}.hero img{width:100%;height:420px;object-fit:cover;border-radius:25px;box-shadow:0 20px 50px #0002}
-section{padding:60px 0}.head{margin-bottom:25px}.head h2{font-size:30px;margin:0}.muted{color:#666;line-height:1.6}.cats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.cat{text-align:center;border:1px solid #eee;border-radius:16px;padding:20px}.cat b{display:block;margin-top:10px}.restaurant{display:grid;grid-template-columns:350px 1fr;border:1px solid #eee;border-radius:22px;overflow:hidden;box-shadow:0 12px 35px #00000010}.restaurant img{width:100%;height:100%;min-height:360px;object-fit:cover}.info{padding:28px}.tag{color:#ff5a1f;font-weight:900;font-size:12px}.info h3{font-size:32px;margin:12px 0}.menu{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.dish{border:1px solid #eee;border-radius:14px;padding:14px}.price{color:#ff5a1f;font-weight:900}.dish button{width:100%;margin-top:10px}.dark{background:#171717;color:#fff;border-radius:22px;padding:35px}.dark p{color:#ccc}.contact{text-align:center;background:#fff8f3}footer{padding:40px 0;border-top:1px solid #eee;color:#666}.modal{display:none;position:fixed;inset:0;background:#0008;z-index:10;align-items:center;justify-content:center;padding:20px}.modal.on{display:flex}.box{background:#fff;border-radius:20px;padding:25px;max-width:500px;width:100%}.close{float:right;border:0;background:none;font-size:25px}
-@media(max-width:800px){nav{display:none}.grid{grid-template-columns:1fr}h1{font-size:43px}.cats{grid-template-columns:repeat(3,1fr)}.restaurant{grid-template-columns:1fr}.restaurant img{height:280px}.menu{grid-template-columns:1fr}}
-@media(max-width:500px){.cats{grid-template-columns:1fr 1fr}.search{flex-direction:column}.search .btn{width:100%}}
-</style></head><body>
-<header><div class="c nav"><a class="logo" href="#">IDRE<span>FOOD</span></a><nav><a href="#accueil">Accueil</a><a href="#restaurants">Restaurants</a><a href="#partenaires">Partenaires</a></nav><button class="btn" onclick="openCart()">🛒 Panier (<span id="count">0</span>)</button></div></header>
-<section class="hero" id="accueil"><div class="c grid"><div><b style="color:#ff5a1f">🇨🇮 LIVRAISON DE REPAS</b><h1>Le goût de chez vous,<br><span>livré chez vous.</span></h1><p>Découvrez les restaurants partenaires IDREFOOD, consultez leurs menus et préparez vos commandes en quelques clics.</p><div class="search"><input id="zone" placeholder="Votre quartier ou adresse"><button class="btn" onclick="find()">📍 Rechercher</button></div></div><img src="au-palmier.jpg" alt="Au Palmier chez Américain"></div></section>
-<section><div class="c"><div class="head"><h2>Que voulez-vous manger ?</h2><p class="muted">Les saveurs que vous aimez, au même endroit.</p></div><div class="cats"><div class="cat">🍚<b>Plats ivoiriens</b></div><div class="cat">🐟<b>Poissons</b></div><div class="cat">🍖<b>Grillades</b></div><div class="cat">🍗<b>Poulet</b></div><div class="cat">🥗<b>Accompagnements</b></div><div class="cat">🥤<b>Boissons</b></div></div></div></section>
-<section id="restaurants" style="background:#fffaf6"><div class="c"><div class="head"><h2>Notre premier restaurant partenaire</h2><p class="muted">Au Palmier chez Américain</p></div><div class="restaurant"><img src="au-palmier.jpg" alt="Au Palmier chez Américain"><div class="info"><b class="tag">RESTAURANT PARTENAIRE</b><h3>Au Palmier chez Américain</h3><p class="muted">🍽️ Cuisine ivoirienne traditionnelle<br>📍 Palmeraie, Rue Ministre, Carrefour MACI Canada<br>📞 07 87 65 93 12 · 05 44 11 64 00</p><p class="muted"><b>Prix annoncés sur le menu : à partir de 2 000 FCFA.</b></p><div class="menu">
-<div class="dish"><b>Sauce Djoumblé noir</b><p class="muted">Agouti, bœuf fumé, brochet fumé</p><span class="price">À partir de 2 000 FCFA</span><button class="btn" onclick="add('Sauce Djoumblé noir',2000)">Ajouter</button></div>
-<div class="dish"><b>Sauce claire</b><p class="muted">Agouti, bœuf fumé, brochet fumé</p><span class="price">À partir de 2 000 FCFA</span><button class="btn" onclick="add('Sauce claire',2000)">Ajouter</button></div>
-<div class="dish"><b>Sauce Djoumblé graine</b><p class="muted">Agouti, bœuf fumé, brochet fumé</p><span class="price">À partir de 2 000 FCFA</span><button class="btn" onclick="add('Sauce Djoumblé graine',2000)">Ajouter</button></div>
-<div class="dish"><b>Choukouya de porc</b><p class="muted">Spécialité maison</p><span class="price">À partir de 2 000 FCFA</span><button class="btn" onclick="add('Choukouya de porc',2000)">Ajouter</button></div>
-<div class="dish"><b>Attiéké poisson fumé</b><p class="muted">APF Original</p><span class="price">À partir de 2 000 FCFA</span><button class="btn" onclick="add('Attiéké poisson fumé',2000)">Ajouter</button></div>
-</div></div></div></div></section>
-<section id="partenaires"><div class="c"><div class="dark"><h2>🏪 Vous êtes restaurateur ou livreur ?</h2><p>Rejoignez les premiers partenaires IDREFOOD et participez au lancement.</p><button class="btn" onclick="partner()">Devenir partenaire</button></div></div></section>
-<section class="contact"><div class="c"><h2>Besoin d'aide ?</h2><p class="muted">WhatsApp IDREFOOD : 05 09 06 23 87</p><button class="btn" onclick="wa()">💬 Contacter IDREFOOD</button></div></section>
-<footer><div class="c"><div class="logo">IDRE<span>FOOD</span></div><p>Commandez. Mangez. Profitez. — Côte d'Ivoire</p></div></footer>
-<div class="modal" id="modal"><div class="box"><button class="close" onclick="closeCart()">×</button><h2>🛒 Votre panier</h2><div id="items"></div><h3 id="total">Total : 0 FCFA</h3><p class="muted">Les prix sont provisoires et devront être confirmés par le restaurant.</p><button class="btn" style="width:100%" onclick="send()">Envoyer la commande sur WhatsApp</button></div></div>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:#171717;background:#fff}
+a{text-decoration:none;color:inherit}
+.container{max-width:1150px;margin:auto;padding:0 20px}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;z-index:10}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:28px;font-weight:900;color:#ff5a1f}.logo span{color:#171717}
+nav{display:flex;gap:28px;font-weight:700;font-size:14px}
+.btn{border:0;border-radius:12px;background:#ff5a1f;color:#fff;padding:14px 20px;font-weight:800;cursor:pointer}
+.hero{background:#fff8f3;padding:65px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:55px;line-height:1;margin:15px 0}
+.hero h1 span{color:#ff5a1f}
+.kicker{color:#ff5a1f;font-weight:800}
+.muted{color:#666;line-height:1.6}
+.search{display:flex;background:#fff;border:1px solid #ddd;border-radius:14px;padding:7px;margin-top:25px}
+.search input{flex:1;border:0;outline:0;padding:14px}
+.hero img{width:100%;height:420px;object-fit:cover;border-radius:25px;box-shadow:0 20px 35px #00000015}
+section{padding:60px 0}
+.head{margin-bottom:25px}
+.head h2{font-size:30px;margin:0 0 8px}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cat{text-align:center;border:1px solid #eee;border-radius:16px;padding:20px;font-weight:800;background:#fff}
+.restaurant{display:grid;grid-template-columns:350px 1fr;gap:25px;border:1px solid #eee;border-radius:22px;overflow:hidden;box-shadow:0 8px 25px #0000000a}
+.restaurant img{width:100%;height:100%;min-height:300px;object-fit:cover}
+.info{padding:28px}
+.tag{display:inline-block;color:#ff5a1f;font-weight:900;font-size:12px}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.dish{border:1px solid #eee;border-radius:14px;padding:14px}
+.price{color:#ff5a1f;font-weight:900;margin-top:8px}
+.dish button{width:100%;margin-top:10px;padding:10px;border:0;border-radius:10px;background:#ff5a1f;color:#fff;font-weight:800;cursor:pointer}
+footer{background:#171717;color:#fff;padding:35px 0;margin-top:20px}
+footer .logo{color:#ff5a1f}
+@media(max-width:800px){
+nav{display:none}.grid{grid-template-columns:1fr}.hero h1{font-size:43px}.hero img{height:320px}
+.cats{grid-template-columns:repeat(2,1fr)}.restaurant{grid-template-columns:1fr}.menu{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+<a class="logo" href="#accueil">IDRE<span>FOOD</span></a>
+<nav>
+<a href="#accueil">Accueil</a>
+<a href="#restaurants">Restaurants</a>
+<a href="#partenaires">Partenaires</a>
+</nav>
+<button class="btn" onclick="voirPanier()">🛒 Panier (<span id="count">0</span>)</button>
+</div>
+</header>
+
+<main>
+<section class="hero" id="accueil">
+<div class="container grid">
+<div>
+<div class="kicker">CI LIVRAISON DE REPAS</div>
+<h1>Le goût de chez vous,<br><span>livré chez vous.</span></h1>
+<p class="muted">Découvrez les restaurants partenaires IDREFOOD, consultez leurs menus et préparez vos commandes en quelques clics.</p>
+<div class="search">
+<input id="zone" placeholder="Votre quartier ou adresse">
+<button class="btn" onclick="find()">📍 Rechercher</button>
+</div>
+</div>
+<img src="au-palmier.jpg" alt="Restaurant Au Palmier">
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="head">
+<h2>Que voulez-vous manger ?</h2>
+<p class="muted">Les saveurs que vous aimez, au même endroit.</p>
+</div>
+<div class="cats">
+<div class="cat">🍲 Plats traditionnels</div>
+<div class="cat">🍗 Poulet</div>
+<div class="cat">🐟 Poisson</div>
+<div class="cat">🥤 Boissons</div>
+</div>
+</div>
+</section>
+
+<section id="restaurants" style="background:#fffaf6">
+<div class="container">
+<div class="head">
+<h2>Notre premier restaurant partenaire</h2>
+<p class="muted">Commandez facilement chez Au Palmier.</p>
+</div>
+<div class="restaurant">
+<img src="au-palmier.jpg" alt="Au Palmier chez Américain">
+<div class="info">
+<div class="tag">RESTAURANT PARTENAIRE</div>
+<h2>Au Palmier chez Américain</h2>
+<p class="muted">La vraie cuisine ivoirienne. Plats traditionnels et spécialités maison.</p>
+<div class="menu">
+<div class="dish"><b>Sauce Djomblé noir</b><p class="muted">Agouti, bœuf fumé, brochet fumé</p><div class="price">À partir de 2 000 FCFA</div><button onclick="ajouter('Sauce Djomblé noir')">Ajouter</button></div>
+<div class="dish"><b>Sauce Claire</b><p class="muted">Agouti, bœuf fumé, brochet fumé</p><div class="price">À partir de 2 000 FCFA</div><button onclick="ajouter('Sauce Claire')">Ajouter</button></div>
+<div class="dish"><b>Sauce Djomblé graine</b><p class="muted">Agouti, bœuf fumé, brochet fumé</p><div class="price">À partir de 2 000 FCFA</div><button onclick="ajouter('Sauce Djomblé graine')">Ajouter</button></div>
+<div class="dish"><b>Choukouya de porc</b><p class="muted">Spécialité maison</p><div class="price">À partir de 2 000 FCFA</div><button onclick="ajouter('Choukouya de porc')">Ajouter</button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="partenaires">
+<div class="container">
+<div class="head"><h2>Vous êtes restaurant ou partenaire ?</h2><p class="muted">Rejoignez IDREFOOD et recevez des commandes de nouveaux clients.</p></div>
+<button class="btn" onclick="partner()">Devenir partenaire</button>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container">
+<div class="logo">IDRE<span>FOOD</span></div>
+<p>Plateforme de commande et livraison de repas en Côte d'Ivoire.</p>
+</div>
+</footer>
+
 <script>
-let cart=[];
-function add(n,p){cart.push({n,p});document.getElementById('count').textContent=cart.length;alert(n+" ajouté au panier.");}
-function openCart(){document.getElementById('modal').classList.add('on');render()}
-function closeCart(){document.getElementById('modal').classList.remove('on')}
-function render(){let e=document.getElementById('items');if(!cart.length)e.innerHTML='<p class="muted">Panier vide.</p>';else e.innerHTML=cart.map(x=>'<p><b>'+x.n+'</b> — '+x.p.toLocaleString()+' FCFA</p>').join('');let t=cart.reduce((a,x)=>a+x.p,0);document.getElementById('total').textContent='Total : '+t.toLocaleString()+' FCFA'}
-function send(){if(!cart.length)return alert('Ajoutez un plat.');let t=cart.map(x=>'• '+x.n+' — '+x.p+' FCFA').join('%0A');window.open('https://wa.me/2250509062387?text='+encodeURIComponent('Bonjour IDREFOOD, je souhaite commander :%0A'+t),'_blank')}
-function wa(){window.open('https://wa.me/2250509062387','_blank')}
-function partner(){window.open('https://wa.me/2250509062387?text='+encodeURIComponent('Bonjour IDREFOOD, je souhaite devenir partenaire.'),'_blank')}
-function find(){let z=document.getElementById('zone').value;if(!z)return alert('Entrez votre quartier ou votre adresse.');document.getElementById('restaurants').scrollIntoView({behavior:'smooth'});}
-</script></body></html>
+let panier=0;
+function ajouter(nom){
+panier++;
+document.getElementById('count').textContent=panier;
+alert(nom+" a été ajouté au panier.");
+}
+function voirPanier(){alert("Votre panier contient "+panier+" article(s).");}
+function find(){
+const z=document.getElementById('zone').value.trim();
+if(!z){alert("Entrez votre quartier ou votre adresse.");return;}
+document.getElementById('restaurants').scrollIntoView({behavior:'smooth'});
+}
+function partner(){
+window.open('https://wa.me/2250509062387?text='+encodeURIComponent("Bonjour IDREFOOD, je souhaite devenir partenaire."),'_blank');
+}
+</script>
+</body>
+</html>
