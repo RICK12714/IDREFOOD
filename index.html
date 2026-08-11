@@ -25,9 +25,13 @@ function toggleCart(){panel.classList.toggle("open");draw()}
 function filter(c){render(dishes.filter(x=>x[3]==c));restaurants.scrollIntoView({behavior:"smooth"})}
 function partner(){window.open("https://wa.me/2250509062387?text="+encodeURIComponent("Bonjour IDREFOOD, je souhaite devenir partenaire."),"_blank")}
 function order(){
-  if(!cart.length) return alert("Votre panier est vide.");
-  if(!name.value.trim() || !phone.value.trim() || !address.value.trim())
+  if(!cart.length){
+    return alert("Votre panier est vide.");
+  }
+
+  if(!name.value.trim() || !phone.value.trim() || !address.value.trim()){
     return alert("Veuillez remplir votre nom, téléphone et adresse de livraison.");
+  }
 
   let message = "Bonjour IDREFOOD, je souhaite passer cette commande :\n\n";
 
@@ -40,7 +44,8 @@ function order(){
   message += "\n📞 Téléphone : " + phone.value.trim();
   message += "\n📍 Adresse : " + address.value.trim();
 
-  window.open("https://wa.me/2250509062387?text=" + encodeURIComponent(message), "_blank");
-}return alert("Remplissez votre nom, téléphone et adresse.");let m="Bonjour IDREFOOD, je souhaite commander.%0A%0ANom : "+name.value+"%0ATéléphone : "+phone.value+"%0AAdresse : "+address.value+"%0A%0ACommande :%0A";cart.forEach(x=>m+="- "+x[0]+" x"+x[4]+" = "+(x[2]*x[4]).toLocaleString("fr-FR")+" FCFA%0A");m+="%0ATotal : "+cart.reduce((s,x)=>s+x[2]*x[4],0).toLocaleString("fr-FR")+" FCFA";window.open("https://wa.me/2250509062387?text="+m,"_blank")}
-render();draw();
+  const whatsappUrl = "https://wa.me/2250509062387?text=" + encodeURIComponent(message);
+
+  window.open(whatsappUrl, "_blank");
+}
 </script></body></html>
