@@ -24,7 +24,7 @@ function qty(i,n){cart[i][4]+=n;if(cart[i][4]<=0)cart.splice(i,1);draw()}
 function toggleCart(){panel.classList.toggle("open");draw()}
 function filter(c){render(dishes.filter(x=>x[3]==c));restaurants.scrollIntoView({behavior:"smooth"})}
 function partner(){window.open("https://wa.me/2250509062387?text="+encodeURIComponent("Bonjour IDREFOOD, je souhaite devenir partenaire."),"_blank")}
-function order(){
+  function order(){
   if(!cart.length){
     return alert("Votre panier est vide.");
   }
